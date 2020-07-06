@@ -1,0 +1,33 @@
+# Template file for 'OpenJazz'
+pkgname=openjazz
+version=1.1
+revision=1
+_gitrev=a34e79dba5756000ad3796efae61a57be4a46496
+build_style=gnu-makefile
+wrksrc="openjazz-a34e79dba5756000ad3796efae61a57be4a46496"
+configure_args="-DDATAPATH='/opt/openjazz' -DHOMEDIR"
+makedepends="SDL2-devel"
+short_desc="Openjazz Sandang OGA-SDL2 Branch"
+maintainer="NeonLightning"
+license="Unlicense"
+homepage="https://github.com/sana2dang/openjazz"
+distfiles="https://github.com/sana2dang/openjazz/archive/${_gitrev}.tar.gz"
+checksum=fe76aca99a319ee70c1eaeec17a935880c7a73f02e42ac1917e581062ea38e67
+
+export CPPFLAGS="$CPPFLAGS -DDATAPATH=/opt/openjazz/ -DHOMEDIR"
+
+# pre_build() {
+# }
+
+do_build() {
+	mkdir -p /opt/openjazz
+	sed 's|"/."|"//opt//openjazz/"|' -i ./src/main.cpp
+# 	CPPFLAGS="-DDATAPATH="/roms/ports/openjazz/" -DHOMEDIR" 
+	make -j4
+}
+
+do_install() {
+	vbin OpenJazz
+# 	vinstall OpenJazz 777 /opt/openjazz
+	vinstall openjazz.000 644 /opt/openjazz
+}

@@ -1,0 +1,20 @@
+# Template file for 'devilutionX'
+pkgname=devilutionX-odroidgo2
+version=515ac145c567990d6175768f7d677eae7c0f81b9
+revision=1
+_gitrev=515ac145c567990d6175768f7d677eae7c0f81b9
+build_style=cmake
+configure_args="-DBINARY_RELEASE=ON -DTTF_FONT_PATH=\"/usr/share/fonts/truetype/CharisSILB.ttf\" -DPREFILL_PLAYER_NAME=ON -DNONET=ON -DCMAKE_BUILD_TYPE="Release" -DASAN=OFF -DUBSAN=OFF -DDEBUG=OFF -DLTO=ON -DDIST=OFF -DFASTER=OFF"
+makedepends="SDL2-devel SDL2_ttf-devel SDL2_mixer-devel libsodium-devel"
+short_desc="Diablo I engine for modern operating systems"
+patch_args="-p1"
+maintainer="NeonLightning"
+license="Unlicense"
+homepage="https://github.com/diasurgical/devilutionX"
+distfiles="https://github.com/diasurgical/devilutionX/archive/${_gitrev}.tar.gz"
+checksum=410f3cf55d4402f2b8e42101a43a15b591cfa555737f603011143f3e1da6ac55
+
+do_install() {
+	vbin build/devilutionx
+	vlicense LICENSE
+}
